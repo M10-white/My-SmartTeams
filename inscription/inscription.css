@@ -1,0 +1,143 @@
+/* Style de l'en-tête */
+.signup-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-header h1 {
+    font-size: 32px;
+    color: #fffbf1;
+}
+
+.signup-header span {
+    color: #d9524a;
+}
+
+/* Conteneur principal pour le formulaire */
+.signup-container {
+    background-color: rgb(241, 241, 241);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    width: 350px;
+    text-align: center;
+}
+
+/* Style du formulaire */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Style des étiquettes */
+.signup-form label {
+    font-size: 14px;
+    color: #1a1a1a;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+/* Style des champs de formulaire */
+.signup-form input,
+.signup-form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.signup-form input:focus,
+.signup-form select:focus {
+    border-color: #d9524a;
+    outline: none;
+}
+
+/* Boutons d'inscription */
+.signup-button {
+    background-color: #d9524a;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+    background-color: #a83d38;
+}
+
+/* Ajustement des marges et des espacements */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.signup-form p {
+    font-size: 14px;
+    color: #d9524a;
+}
+
+/* Style pour les messages d'erreur ou de validation */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px; /* Espace depuis le haut */
+    left: 20px; /* Espace depuis la gauche */
+    font-size: 50px; /* Taille de la flèche */
+    color: #e3e9e8; /* Couleur de la flèche */
+    cursor: pointer; /* Curseur pointer */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+.back-arrow:hover {
+    color: #d9524a; /* Couleur lors du survol */
+}
+
+/* Style du pop-up de succès */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50; /* Couleur de fond verte */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    animation: popupShow 0.5s forwards; /* Animation pour faire apparaître le pop-up */
+}
+
+/* Animation d'apparition du pop-up */
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
