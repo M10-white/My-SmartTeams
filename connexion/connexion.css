@@ -1,0 +1,78 @@
+.login-container {
+    background-color: #e3e9e8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    width: 300px; /* Largeur du formulaire */
+}
+
+.login-container h1 {
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    width: 100%; /* Prendre toute la largeur du conteneur */
+    padding: 10px;
+    margin: 10px 0; /* Espacement vertical entre les champs */
+    border: 1px solid #ccc; /* Bordure grise */
+    border-radius: 5px; /* Coins arrondis */
+    box-sizing: border-box; /* Inclure le padding dans la largeur totale */
+}
+
+.login-container button {
+    background-color: #d9524a; /* Couleur du bouton */
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px; /* Espacement interne */
+    font-size: 16px; /* Taille du texte */
+    cursor: pointer; /* Curseur pointer */
+    transition: background-color 0.3s; /* Transition de couleur */
+    margin-top: 1%;
+}
+
+/* Style des étiquettes */
+.login-container label {
+    font-size: 14px;
+    color: #1a1a1a;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.login-container button:hover {
+    background-color: #a83d38; /* Couleur du bouton au survol */
+}
+
+.login-container p {
+    margin-top: 15px; /* Espacement au-dessus du texte */
+}
+
+/* Style de l'en-tête */
+.signup-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.signup-header h1 {
+    font-size: 32px;
+    color: #fffbf1;
+}
+
+.signup-header span {
+    color: #d9524a;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px; /* Espace depuis le haut */
+    left: 20px; /* Espace depuis la gauche */
+    font-size: 50px; /* Taille de la flèche */
+    color: #e3e9e8; /* Couleur de la flèche */
+    cursor: pointer; /* Curseur pointer */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+.back-arrow:hover {
+    color: #d9524a; /* Couleur lors du survol */
+}

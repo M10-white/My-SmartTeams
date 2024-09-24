@@ -26,25 +26,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Vérification si les mots de passe correspondent
     if ($password != $confirm_password) {
-        echo "Les mots de passe ne correspondent pas.";
+        echo "<script>alert('Les mots de passe ne correspondent pas.');</script>";
+        exit();
+    }
+
+    // Vérification des critères du mot de passe
+    $password_pattern = "/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{7,}$/";
+    if (!preg_match($password_pattern, $password)) {
+        echo "<script>
+            var popup = document.createElement('div');
+            popup.className = 'popup error';
+            popup.textContent = 'Le mot de passe doit comporter au moins 7 caractères, incluant des lettres, des chiffres et un symbole.';
+            document.body.appendChild(popup);
+            setTimeout(function() {
+                popup.style.animation = 'popupHide 0.5s forwards'; 
+                setTimeout(function() {
+                    popup.remove(); 
+                }, 500);
+            }, 3000);
+        </script>";
+        exit();
+    }
+
+    // Vérifier si l'adresse email existe déjà dans la base de données
+    $email_check_query = "SELECT * FROM utilisateurs WHERE email='$email' LIMIT 1";
+    $result = $conn->query($email_check_query);
+
+    if ($result->num_rows > 0) {
+        echo "<script>
+            var popup = document.createElement('div');
+            popup.className = 'popup error';
+            popup.innerHTML = 'Cette adresse email est déjà inscrite. Voulez-vous vous <a href=\"../connexion/connexion.php\">connecter</a> ?';
+            document.body.appendChild(popup);
+            setTimeout(function() {
+                popup.style.animation = 'popupHide 0.5s forwards'; 
+                setTimeout(function() {
+                    popup.remove(); 
+                }, 500);
+            }, 3000);
+        </script>";
         exit();
     }
 
     // Hachage du mot de passe pour plus de sécurité
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
+    
     // Préparation de la requête SQL pour insérer les données
-    $sql = "INSERT INTO utilisateurs (prenom, nom, email, status, mot_de_passe)
-            VALUES ('$prenom', '$nom', '$email', '$status', '$hashed_password')";
+    $sql = "INSERT INTO utilisateurs (prenom, nom, email, status, mot_de_passe) VALUES ('$prenom', '$nom', '$email', '$status', '$hashed_password')";
 
     // Exécution de la requête
     if ($conn->query($sql) === TRUE) {
         // Affichage du pop-up et redirection après 3 secondes
         echo "<script>
-            document.body.innerHTML += '<div class=\"popup success\">Inscription réussie !</div>';
+            var popup = document.createElement('div');
+            popup.className = 'popup success';
+            popup.textContent = 'Inscription réussie !';
+            document.body.appendChild(popup);
             setTimeout(function() {
-                window.location.href = 'connexion.php';
-            }, 3000); // Redirection après 3 secondes
+                window.location.href = '../connexion/connexion.php';
+            }, 2500); 
         </script>";
     } else {
         echo "Erreur : " . $sql . "<br>" . $conn->error;

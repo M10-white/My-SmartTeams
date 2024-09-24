@@ -141,3 +141,46 @@
     }
 }
 
+/* Pop-up d'erreur */
+.popup.error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f44336; /* Couleur de fond rouge */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    animation: popupShow 0.5s forwards;
+}
+
+/* Ajout d'un lien dans le pop-up */
+.popup.error a {
+    color: #ffffff;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.popup.error a:hover {
+    color: #ffeb3b;
+}
+
+/* Animation pour faire disparaître le pop-up */
+@keyframes popupHide {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%); /* Reste à la position originale */
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% - 20px)); /* Déplace vers le haut lors de la disparition */
+    }
+}
+
+

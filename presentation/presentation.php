@@ -1,3 +1,23 @@
+<?php
+session_start(); // Démarre la session
+
+// Vérifier si l'utilisateur est connecté
+if (isset($_SESSION['email'])) {
+    // L'utilisateur est connecté, le lien doit diriger vers compteProfil.php
+    $profil_link = "../compteProfil/compteProfil.php";
+} else {
+    // L'utilisateur n'est pas connecté, le lien doit diriger vers la page de connexion/inscription
+    $profil_link = "../profil/profil.php";
+}
+
+// Si l'utilisateur est connecté, affiche un message de bienvenue ou le profil
+if (isset($_SESSION['email'])) {
+    // Vous pouvez inclure des options spécifiques pour les utilisateurs connectés
+    $prenom = $_SESSION['prenom'];
+    echo "Bienvenue, $prenom";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,10 +41,10 @@
     </header>
 
     <div class="menu" id="menu">
-        <a href="../accueil/index.html">Accueil</a>
-        <a href="../presentation/presentation.html">Présentation</a>
-        <a href="#">Forum</a>
-        <a href="../profil/profil.html">Mon Profil</a>
+        <a href="../accueil/index.php">Accueil</a>
+        <a href="../presentation/presentation.php">Présentation</a>
+        <a href="../forum/forum.php">Forum</a>
+        <a href="<?php echo $profil_link; ?>">Mon Profil</a>
     </div>
 
     <div class="presentation-container">
