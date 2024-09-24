@@ -1,0 +1,166 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: filter 0.3s ease; /* Transition pour le flou */
+}
+
+.content h1 {
+  color: #fffbf1;
+  text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
+  font-size: 80px;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: -3px;
+  margin: 0;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.content h1:before,
+.content h1:after {
+  content: '';
+  padding: .9em .4em;
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  top: 50%;
+  display: block;
+  border: 15px solid red;
+  transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  animation: 10s infinite alternate ease-in-out tipsy;
+}
+
+.content h1:before {
+  border-color: #d9524a #d9524a rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+  z-index: -1;
+}
+
+.content h1:after {
+  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #d9524a #d9524a;
+}
+
+.header {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.menu-icon {
+    color: #e3e9e8;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.content {
+    text-align: center;
+}
+
+@keyframes tipsy {
+    0% {
+      transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    }
+  }
+
+/* Animation pour le titre */
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation de mouvement */
+@keyframes move {
+    0%, 100% {
+        transform: translateX(0); /* Position de départ */
+    }
+    50% {
+        transform: translateX(10px); /* Déplacement vers la droite */
+    }
+}
+
+
+.content p {
+    font-size: 18px;
+    color: #e3e9e8;
+    margin-top: 45%;
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    right: -200px; /* Positionné en dehors de l'écran */
+    width: 200px;
+    height: 100%;
+    background-color: #222222;
+    box-shadow: -5px 0 10px rgba(0,0,0,0.3);
+    padding-top: 60px;
+    transition: right 0.3s ease, opacity 0.3s ease;
+    opacity: 0; /* Invisible par défaut */
+    z-index: 2; /* Assure que le menu soit au-dessus du flou */
+}
+
+.menu.open {
+    right: 0; /* Déplace le menu dans l'écran */
+    opacity: 1; /* Rendre le menu visible */
+}
+
+.menu a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+.menu a:hover {
+    background-color: #d9524a;
+}
+
+/* Ajout d'un pseudo-élément pour le flou */
+body.blur::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(224, 247, 250, 0.5); /* Légèrement transparent pour laisser voir le fond */
+    backdrop-filter: blur(5px); /* Applique le flou */
+    z-index: 1; /* Assure que le flou soit derrière le menu */
+}
+
+.start-button {
+    background-color: #d9524a; /* Couleur de fond du bouton */
+    color: #ffffff; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px 20px; /* Espacement interne */
+    font-size: 18px; /* Taille du texte */
+    cursor: pointer; /* Curseur pointer */
+    margin-top: 20px; /* Espacement au-dessus du bouton */
+    transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+.start-button:hover {
+    background-color: #a83d38; /* Couleur de fond lors du survol */
+}

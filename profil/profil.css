@@ -1,0 +1,54 @@
+.profile-container {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.profile-container h1 {
+    color: #fffbf1;
+    text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
+    font-size: 80px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: -3px;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.profile-container p {
+    font-size: 20px; /* Taille du sous-titre */
+    color: #e3e9e8; /* Couleur du sous-titre */
+    margin: 10px 0; /* Espacement autour du texte */
+}
+
+.signup-button, .login-button {
+    background-color: #d9524a; /* Couleur de fond des boutons */
+    color: white; /* Couleur du texte */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px 20px; /* Espacement interne */
+    font-size: 18px; /* Taille du texte */
+    cursor: pointer; /* Curseur pointer */
+    margin: 20px 10px; /* Espacement entre les boutons */
+    transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+.signup-button:hover, .login-button:hover {
+    background-color: #a83d38; /* Couleur de fond lors du survol */
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px; /* Espace depuis le haut */
+    left: 20px; /* Espace depuis la gauche */
+    font-size: 50px; /* Taille de la flèche */
+    color: #e3e9e8; /* Couleur de la flèche */
+    cursor: pointer; /* Curseur pointer */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+.back-arrow:hover {
+    color: #d9524a; /* Couleur lors du survol */
+}
