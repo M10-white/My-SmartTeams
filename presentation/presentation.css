@@ -4,10 +4,9 @@
 }
 
 .logo {
-    position:absolute;
-    left: 30%;
-    width: 100px; /* Taille du logo */
+    width: 13%; /* Taille du logo */
     height: auto; /* Ajustement automatique de la hauteur */
+    margin-left: 20%; /* Espace entre le logo et le titre */
 }
 
 .presentation-container {
@@ -18,6 +17,11 @@
 
 .presentation-container h2 {
     color: #d9524a ;
+}
+.logo-container {
+    display: flex; /* Utilise Flexbox pour aligner horizontalement */
+    justify-content: left; /* Centre le contenu horizontalement */
+    align-items: center; /* Aligne verticalement */
 }
 
 .logo-container h1 {
@@ -30,7 +34,7 @@
     margin: 0;
     position: absolute;
     top: 25%;
-    left: 60%;
+    left: 58%;
     transform: translateX(-50%) translateY(-50%);
 }
 
