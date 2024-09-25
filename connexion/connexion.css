@@ -76,3 +76,33 @@
 .back-arrow:hover {
     color: #d9524a; /* Couleur lors du survol */
 }
+
+/* Pop-up d'erreur */
+.popup.error {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f44336; /* Couleur de fond rouge */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    animation: popupShow 0.5s forwards;
+}
+
+/* Animation pour afficher le pop-up */
+@keyframes popupShow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Animation pour masquer le pop-up */
+@keyframes popupHide {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

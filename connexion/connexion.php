@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['nom'] = $user['nom'];
+            $_SESSION['ville'] = $user['ville'];
+            $_SESSION['formation'] = $user['formation'];
             $_SESSION['prenom'] = $user['prenom'];
             $_SESSION['status'] = $user['status'];
             $_SESSION['date_inscription'] = $user['date_inscription'];
@@ -39,10 +41,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: ../compteProfil/compteProfil.php");
             exit();
         } else {
-            echo "Mot de passe incorrect.";
+            // Mot de passe incorrect
+            echo "<script>
+                document.body.innerHTML += '<div class=\"popup error\">Mot de passe incorrect.</div>';
+                setTimeout(function() {
+                    document.querySelector('.popup.error').style.animation = 'popupHide 0.5s forwards';
+                    setTimeout(function() {
+                        document.querySelector('.popup.error').remove();
+                    }, 500);
+                }, 3000);
+            </script>";
         }
     } else {
-        echo "Aucun utilisateur trouvé avec cet email.";
+        // Aucun utilisateur trouvé avec cet email
+        echo "<script>
+            document.body.innerHTML += '<div class=\"popup error\">Aucun utilisateur trouvé avec cet email.</div>';
+            setTimeout(function() {
+                document.querySelector('.popup.error').style.animation = 'popupHide 0.5s forwards';
+                setTimeout(function() {
+                    document.querySelector('.popup.error').remove();
+                }, 500);
+            }, 3000);
+        </script>";
     }
 }
 

@@ -35,7 +35,7 @@ if (isset($_SESSION['email'])) {
     <div class="content">
         <h1 target="_blank">My SmartTeams</h1>        
         <p>La plateforme qui connecte les nouveaux et anciens étudiants du campus EPSI WIS.</p>
-        <button class="start-button">Commencer l'aventure</button>
+        <a href="../forum/forum.php"><button class="start-button">Commencer l'aventure</button></a>
     </div>
 
     <div class="menu" id="menu">
@@ -45,6 +45,6 @@ if (isset($_SESSION['email'])) {
         <a href="<?php echo $profil_link; ?>">Mon Profil</a>
     </div>
 
-    <script src="../js/scriptIndex.js"></script>
 </body>
+<script src="../js/scriptIndex.js"></script>
 </html>

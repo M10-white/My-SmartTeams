@@ -1,0 +1,139 @@
+h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.new-topic, .new-post {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px auto; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 90%;
+}z
+
+.new-topic h2, .new-post h2 {
+    margin-bottom: 20px;
+}
+
+.new-topic input, .new-topic textarea, .new-post textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.new-topic button, .new-post button {
+    background-color: #d9524a;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.new-topic button:hover, .new-post button:hover {
+    background-color: #b8453c;
+}
+
+.topics-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.topic {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.topic h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #d9524a;
+}
+
+.topic h3 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.topic p {
+    color: #555;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.posts {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.post {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post p {
+    margin: 0;
+    color: #333;
+}
+
+.post p strong {
+    color: #d9524a;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px; /* Espace depuis le haut */
+    left: 20px; /* Espace depuis la gauche */
+    font-size: 50px; /* Taille de la flèche */
+    color: #e3e9e8; /* Couleur de la flèche */
+    cursor: pointer; /* Curseur pointer */
+    transition: color 0.3s ease; /* Transition de couleur */
+}
+
+.back-arrow:hover {
+    color: #d9524a; /* Couleur lors du survol */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .new-topic, .new-post, .topics-list, .posts {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .new-topic button, .new-post button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

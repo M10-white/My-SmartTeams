@@ -21,12 +21,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = $conn->real_escape_string($_POST['nom']);
     $email = $conn->real_escape_string($_POST['email']);
     $status = $conn->real_escape_string($_POST['status']);
+    $formation = $conn->real_escape_string($_POST['formation']);
+    $ville = $conn->real_escape_string($_POST['ville']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm-password'];
 
     // Vérification si les mots de passe correspondent
     if ($password != $confirm_password) {
-        echo "<script>alert('Les mots de passe ne correspondent pas.');</script>";
+        echo "<script>
+        var popup = document.createElement('div');
+        popup.className = 'popup error';
+        popup.textContent = 'Les mots de passe ne correspondent pas.';
+        document.body.appendChild(popup);
+        setTimeout(function() {
+            popup.style.animation = 'popupHide 0.5s forwards'; 
+            setTimeout(function() {
+                popup.remove(); 
+            }, 500);
+        }, 3000);
+    </script>";
         exit();
     }
 
@@ -72,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
     // Préparation de la requête SQL pour insérer les données
-    $sql = "INSERT INTO utilisateurs (prenom, nom, email, status, mot_de_passe) VALUES ('$prenom', '$nom', '$email', '$status', '$hashed_password')";
+    $sql = "INSERT INTO utilisateurs (prenom, nom, email, status, formation, ville, mot_de_passe) VALUES ('$prenom', '$nom', '$email', '$status', '$formation', '$ville', '$hashed_password')";
 
     // Exécution de la requête
     if ($conn->query($sql) === TRUE) {
@@ -84,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.body.appendChild(popup);
             setTimeout(function() {
                 window.location.href = '../connexion/connexion.php';
-            }, 2500); 
+            }, 1000); 
         </script>";
     } else {
         echo "Erreur : " . $sql . "<br>" . $conn->error;

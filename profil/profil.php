@@ -13,7 +13,7 @@ if (isset($_SESSION['email'])) {
 // Informations de connexion à la base de données
 $servername = "localhost";
 $username = "root";
-$password = ""; // Remplace par ton mot de passe MySQL si nécessaire
+$password = ""; 
 $dbname = "my_smartteams";
 
 // Connexion à la base de données
@@ -49,7 +49,7 @@ if ($conn->connect_error) {
 </body>
 <script>
     function goBack() {
-        window.history.back(); 
+        window.location.href = '../accueil/index.php'; 
     }
 </script>
 </html>
