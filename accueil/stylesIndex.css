@@ -120,8 +120,8 @@ body {
 }
 
 .menu.open {
-    right: 0; /* Déplace le menu dans l'écran */
-    opacity: 1; /* Rendre le menu visible */
+    right: 0; 
+    opacity: 1; 
 }
 
 .menu a {
