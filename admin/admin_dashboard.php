@@ -35,12 +35,6 @@ $topics_count = $topics_count_result->fetch_assoc()['total_topics'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord Admin</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
 
         .container {
             max-width: 900px;
@@ -90,6 +84,7 @@ $topics_count = $topics_count_result->fetch_assoc()['total_topics'];
             background-color: #b8453c;
         }
     </style>
+    <link rel="stylesheet" href="../accueil/stylesIndex.css">
 </head>
 <body>
 <div class="container">

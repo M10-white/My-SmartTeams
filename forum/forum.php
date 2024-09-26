@@ -18,12 +18,19 @@ if ($conn->connect_error) {
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['email'])) {
-    // L'utilisateur est connecté, le lien doit diriger vers compteProfil.php
-    $profil_link = "../compteProfil/compteProfil.php";
+    // Vérifier le rôle de l'utilisateur
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+        // Si l'utilisateur est administrateur, diriger vers le tableau de bord admin
+        $profil_link = "../admin/admin_dashboard.php"; 
+    } else {
+        // Si l'utilisateur est normal, diriger vers compteProfil.php
+        $profil_link = "../compteProfil/compteProfil.php";
+    }
 } else {
     // L'utilisateur n'est pas connecté, le lien doit diriger vers la page de connexion/inscription
     $profil_link = "../profil/profil.php";
 }
+
 
 // Vérifier si un nouveau sujet est créé
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'])) {
@@ -102,6 +109,9 @@ $result = $conn->query($sql);
             <option value="Technologie">Technologie</option>
             <option value="Études">Études</option>
             <option value="Campus">Campus</option>
+            <option value="Alternance">Alternance</option>
+            <option value="Evenement">Evenement</option>
+            <option value="Nourriture">Nourriture</option>
             </select>
             <button type="submit">Publier</button>
         </form>

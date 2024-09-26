@@ -3,19 +3,19 @@ session_start(); // Démarre la session
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['email'])) {
-    // L'utilisateur est connecté, le lien doit diriger vers compteProfil.php
-    $profil_link = "../compteProfil/compteProfil.php";
+    // Vérifier le rôle de l'utilisateur
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+        // Si l'utilisateur est administrateur, diriger vers le tableau de bord admin
+        $profil_link = "../admin/admin_dashboard.php"; 
+    } else {
+        // Si l'utilisateur est normal, diriger vers compteProfil.php
+        $profil_link = "../compteProfil/compteProfil.php";
+    }
 } else {
     // L'utilisateur n'est pas connecté, le lien doit diriger vers la page de connexion/inscription
     $profil_link = "../profil/profil.php";
 }
 
-// Si l'utilisateur est connecté, affiche un message de bienvenue ou le profil
-if (isset($_SESSION['email'])) {
-    // Vous pouvez inclure des options spécifiques pour les utilisateurs connectés
-    $prenom = $_SESSION['prenom'];
-    echo "Bienvenue, $prenom";
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
