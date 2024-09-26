@@ -36,9 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['prenom'] = $user['prenom'];
             $_SESSION['status'] = $user['status'];
             $_SESSION['date_inscription'] = $user['date_inscription'];
+            $_SESSION['role'] = $user['role'];
 
-            // Redirection vers la page de profil
-            header("Location: ../compteProfil/compteProfil.php");
+            // Vérification du rôle pour redirection
+            if ($user['role'] == 'admin') {
+                header("Location: ../admin/admin_dashboard.php");
+            } else {
+                header("Location: ../compteProfil/compteProfil.php");
+            }
             exit();
         } else {
             // Mot de passe incorrect

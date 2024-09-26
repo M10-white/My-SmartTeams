@@ -40,7 +40,7 @@
 }
 
 .back-arrow {
-    position: absolute;
+    position: fixed;
     top: 20px; /* Espace depuis le haut */
     left: 20px; /* Espace depuis la gauche */
     font-size: 50px; /* Taille de la flèche */

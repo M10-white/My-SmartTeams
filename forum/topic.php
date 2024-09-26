@@ -34,7 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
 
     $sql = "INSERT INTO posts (topic_id, user_id, content) VALUES ('$topic_id', '$user_id', '$content')";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Réponse ajoutée avec succès!');</script>";
+        echo "<script>
+        var popup = document.createElement('div');
+        popup.className = 'popup success';
+        popup.textContent = 'Réponse ajoutée avec succès!';
+        document.body.appendChild(popup);
+        setTimeout(function() {
+            popup.style.animation = 'popupHide 0.5s forwards'; 
+            setTimeout(function() {
+                popup.remove(); 
+            }, 500);
+        }, 2000);
+    </script>";
     } else {
         echo "Erreur : " . $sql . "<br>" . $conn->error;
     }
@@ -50,11 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
     <title><?php echo htmlspecialchars($topic['title']); ?> - Forum</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.png">
     <link rel="stylesheet" href="forum.css">
-    <link rel="stylesheet" href="../accueil/stylesIndex.css">
 </head>
 <body>
 
     <div class="back-arrow" onclick="goBack()">←</div>
+
+    <div class="forum-container">
 
     <div class="new-post">
         <h1><?php echo htmlspecialchars($topic['title']); ?></h1>
@@ -86,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
             <textarea name="content" placeholder="Votre réponse..." required></textarea><br>
             <button type="submit">Poster la réponse</button>
         </form>
+    </div>
     </div>
 
 </body>

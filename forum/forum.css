@@ -1,3 +1,14 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: filter 0.3s ease; /* Transition pour le flou */
+}
+
 h1 {
     font-size: 24px;
     margin: 0;
@@ -11,13 +22,72 @@ h2 {
     margin-bottom: 15px;
 }
 
+/* Style pour le select */
+select {
+    width: 100%; /* Prend toute la largeur du conteneur */
+    padding: 15px; /* Espacement intérieur */
+    margin-bottom: 15px; /* Espacement en bas */
+    border: 1px solid #ddd; /* Bordure grise */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 16px; /* Taille de la police */
+    background-color: #ffffff; /* Couleur de fond blanche */
+    color: #333; /* Couleur du texte */
+    appearance: none; /* Supprime l'apparence par défaut */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><polygon points="0,0 10,0 5,10" fill="%23333"/></svg>'); /* Flèche personnalisée */
+    background-repeat: no-repeat; /* Pas de répétition de l'image */
+    background-position: right 10px center; /* Position de la flèche */
+    background-size: 10px; /* Taille de la flèche */
+}
+
+/* Style pour le select au survol */
+select:hover {
+    border-color: #d9524a; /* Bordure rouge au survol */
+}
+
+/* Style pour le select lorsqu'il est actif */
+select:focus {
+    border-color: #d9524a; /* Bordure rouge lors de la mise au point */
+    outline: none; /* Supprime l'outline par défaut */
+}
+
+/* Style pour les options */
+option {
+    padding: 10px; /* Espacement intérieur des options */
+    background-color: #ffffff; /* Couleur de fond blanche */
+    color: #333; /* Couleur du texte */
+}
+
+
 .profile-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
 }
+/* Conteneur global pour le forum */
+.forum-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    width: 90%;
+    margin: 20px auto;
+    flex-grow: 1; /* Permet au conteneur de grandir et d'occuper l'espace restant */
+}
 
-.new-topic, .new-post {
+/* Le formulaire reste toujours en haut */
+.new-topic {
+    background-color: white;
+    color: #1a1a1a;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Le formulaire reste en haut quand on scrolle */
+    top: 0;
+    max-width: 900px;
+    width: 90%;
+}
+
+.new-post {
     background-color: #ffffff;
     padding: 20px;
     margin: 20px auto; 
@@ -25,7 +95,7 @@ h2 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     width: 90%;
-}z
+}
 
 .new-topic h2, .new-post h2 {
     margin-bottom: 20px;
@@ -50,17 +120,24 @@ h2 {
     cursor: pointer;
     font-size: 16px;
     text-transform: uppercase;
+    margin-top: 2%;
 }
 
 .new-topic button:hover, .new-post button:hover {
     background-color: #b8453c;
 }
 
+/* Conteneur pour la liste des sujets */
 .topics-list {
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Permet de scroller si la liste dépasse la hauteur */
+    flex-grow: 1; /* Prend l'espace disponible pour permettre le scroll */
+    margin-bottom: 20px; /* Ajouter un espace en bas pour le défilement */
 }
 
+/* Style des sujets individuels */
 .topic {
     background-color: #ffffff;
     padding: 20px;
@@ -86,9 +163,63 @@ h2 {
     margin-top: 10px;
 }
 
+.search-container {
+    max-width: 900px; /* Largeur maximale de la barre de recherche */
+    margin: 20px auto; /* Centrer la barre de recherche */
+    display: flex; /* Utiliser flexbox pour aligner les éléments */
+    align-items: center; /* Centrer verticalement les éléments */
+    gap: 10px; /* Espacement entre les éléments */
+}
+
+.search-container input[type="text"] {
+    margin-bottom: 15px;
+    flex: 1; /* Prendre tout l'espace disponible */
+    padding: 10px; /* Padding interne */
+    border: 1px solid #ddd; /* Bordure légère */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 16px; /* Taille de police */
+    transition: border 0.3s; /* Transition pour un effet visuel */
+    width: 100%;
+}
+
+.search-container input[type="text"]:focus {
+    border-color: #d9524a; /* Couleur de la bordure au focus */
+    outline: none; /* Retirer l'outline par défaut */
+}
+
+.search-container select {
+    padding: 10px; /* Padding interne */
+    border: 1px solid #ddd; /* Bordure légère */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 16px; /* Taille de police */
+    transition: border 0.3s; /* Transition pour un effet visuel */
+}
+
+.search-container select:focus {
+    border-color: #d9524a; /* Couleur de la bordure au focus */
+    outline: none; /* Retirer l'outline par défaut */
+}
+
+.search-container button {
+    background-color: #d9524a; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte */
+    border: none; /* Retirer la bordure */
+    padding: 10px 20px; /* Padding interne */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur en main */
+    font-size: 16px; /* Taille de police */
+    transition: background-color 0.3s; /* Transition pour un effet visuel */
+}
+
+.search-container button:hover {
+    background-color: #b8453c; /* Couleur du bouton au survol */
+}
+
+
+
 .posts {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 20px;
 }
 
 .post {
@@ -97,11 +228,17 @@ h2 {
     margin: 15px 0;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Assurez-vous qu'il ne dépasse pas son conteneur */
+    word-wrap: break-word; /* Permet de couper les mots longs pour éviter le débordement */
+    overflow: hidden; /* Cache tout débordement */
+    display: flex;
+    flex-direction: column; /* Assure que le texte s'organise bien */
 }
 
 .post p {
     margin: 0;
     color: #333;
+
 }
 
 .post p strong {
@@ -109,7 +246,7 @@ h2 {
 }
 
 .back-arrow {
-    position: absolute;
+    position: fixed;
     top: 20px; /* Espace depuis le haut */
     left: 20px; /* Espace depuis la gauche */
     font-size: 50px; /* Taille de la flèche */
@@ -121,6 +258,49 @@ h2 {
 .back-arrow:hover {
     color: #d9524a; /* Couleur lors du survol */
 }
+
+/* Style du pop-up de succès */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50; /* Couleur de fond verte */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    animation: popupShow 0.5s forwards; /* Animation pour faire apparaître le pop-up */
+}
+
+/* Animation d'apparition du pop-up */
+@keyframes popupShow {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Animation pour faire disparaître le pop-up */
+@keyframes popupHide {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%); /* Reste à la position originale */
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, calc(-50% - 20px)); /* Déplace vers le haut lors de la disparition */
+    }
+}
+
 
 /* Responsiveness */
 @media (max-width: 600px) {
@@ -137,3 +317,158 @@ h2 {
         font-size: 14px;
     }
 }
+
+.content h1 {
+    color: #fffbf1;
+    text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
+    font-size: 80px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: -3px;
+    margin: 0;
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .content h1:before,
+  .content h1:after {
+    content: '';
+    padding: .9em .4em;
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    top: 50%;
+    display: block;
+    border: 15px solid red;
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    animation: 10s infinite alternate ease-in-out tipsy;
+  }
+  
+  .content h1:before {
+    border-color: #d9524a #d9524a rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    z-index: -1;
+  }
+  
+  .content h1:after {
+    border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #d9524a #d9524a;
+  }
+  
+  .header {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+  }
+  
+  .menu-icon {
+      color: #e3e9e8;
+      cursor: pointer;
+      font-size: 30px;
+  }
+  
+  .content {
+      text-align: center;
+  }
+  
+  @keyframes tipsy {
+      0% {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+      }
+      100% {
+        transform: translateX(-50%) translateY(-50%) rotate(360deg);
+      }
+    }
+  
+  /* Animation pour le titre */
+  @keyframes pop {
+      0% {
+          transform: scale(0.8);
+          opacity: 0;
+      }
+      50% {
+          transform: scale(1.1);
+          opacity: 1;
+      }
+      100% {
+          transform: scale(1);
+      }
+  }
+  
+  /* Animation de mouvement */
+  @keyframes move {
+      0%, 100% {
+          transform: translateX(0); /* Position de départ */
+      }
+      50% {
+          transform: translateX(10px); /* Déplacement vers la droite */
+      }
+  }
+  
+  
+  .content p {
+      font-size: 18px;
+      color: #e3e9e8;
+      margin-top: 30%;
+  }
+  
+  .menu {
+      position: fixed;
+      top: 0;
+      right: -200px; /* Positionné en dehors de l'écran */
+      width: 200px;
+      height: 100%;
+      background-color: #222222;
+      box-shadow: -5px 0 10px rgba(0,0,0,0.3);
+      padding-top: 60px;
+      transition: right 0.3s ease, opacity 0.3s ease;
+      opacity: 0; /* Invisible par défaut */
+      z-index: 2; /* Assure que le menu soit au-dessus du flou */
+  }
+  
+  .menu.open {
+      right: 0; /* Déplace le menu dans l'écran */
+      opacity: 1; /* Rendre le menu visible */
+  }
+  
+  .menu a {
+      display: block;
+      padding: 15px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+  }
+  
+  .menu a:hover {
+      background-color: #d9524a;
+  }
+  
+  /* Ajout d'un pseudo-élément pour le flou */
+  body.blur::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(224, 247, 250, 0.5); /* Légèrement transparent pour laisser voir le fond */
+      backdrop-filter: blur(5px); /* Applique le flou */
+      z-index: 1; /* Assure que le flou soit derrière le menu */
+  }
+  
+  .start-button {
+      background-color: #d9524a; /* Couleur de fond du bouton */
+      color: #ffffff; /* Couleur du texte */
+      border: none; /* Pas de bordure */
+      border-radius: 5px; /* Coins arrondis */
+      padding: 10px 20px; /* Espacement interne */
+      font-size: 18px; /* Taille du texte */
+      cursor: pointer; /* Curseur pointer */
+      margin-top: 20px; /* Espacement au-dessus du bouton */
+      transition: background-color 0.3s ease; /* Animation de transition */
+  }
+  
+  .start-button:hover {
+      background-color: #a83d38; /* Couleur de fond lors du survol */
+  }
+  
