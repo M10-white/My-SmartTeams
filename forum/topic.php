@@ -27,6 +27,22 @@ $topic = $topic_result->fetch_assoc();
 $sql = "SELECT posts.*, utilisateurs.prenom FROM posts JOIN utilisateurs ON posts.user_id = utilisateurs.id WHERE posts.topic_id = '$topic_id' ORDER BY posts.created_at ASC";
 $posts_result = $conn->query($sql);
 
+// Supprimer un post
+if (isset($_GET['delete_post'])) {
+    $post_id = $_GET['delete_post'];
+    
+    // Vérifier si l'utilisateur est propriétaire du post
+    $user_id = $_SESSION['id'];
+    $delete_sql = "DELETE FROM posts WHERE id = '$post_id' AND user_id = '$user_id'";
+    
+    if ($conn->query($delete_sql) === TRUE) {
+        header("Location: topic.php?id=$topic_id"); // Redirige après suppression pour rafraîchir la page
+        exit();
+    } else {
+        echo "Erreur lors de la suppression : " . $conn->error;
+    }
+}
+
 // Ajouter une nouvelle réponse
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
     $content = $conn->real_escape_string($_POST['content']);
@@ -34,18 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
 
     $sql = "INSERT INTO posts (topic_id, user_id, content) VALUES ('$topic_id', '$user_id', '$content')";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>
-        var popup = document.createElement('div');
-        popup.className = 'popup success';
-        popup.textContent = 'Réponse ajoutée avec succès!';
-        document.body.appendChild(popup);
-        setTimeout(function() {
-            popup.style.animation = 'popupHide 0.5s forwards'; 
-            setTimeout(function() {
-                popup.remove(); 
-            }, 500);
-        }, 2000);
-    </script>";
+        header("Location: topic.php?id=$topic_id"); // Redirige après ajout de la réponse
+        exit();
     } else {
         echo "Erreur : " . $sql . "<br>" . $conn->error;
     }
@@ -82,8 +88,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
             while($post = $posts_result->fetch_assoc()) {
                 echo "<div class='post'>
                         <p><strong>" . htmlspecialchars($post['prenom']) . " :</strong> " . htmlspecialchars($post['content']) . "</p>
-                        <p>" . $post['created_at'] . "</p>
-                      </div>";
+                        <p>" . $post['created_at'] . "</p>";
+
+                // Afficher le bouton de suppression si l'utilisateur est le propriétaire du post
+                if ($_SESSION['id'] == $post['user_id']) {
+                    echo "<a href='javascript:void(0);' class='delete-button' onclick='deletePost(" . $post['id'] . ");'>Supprimer</a>";
+                }
+
+                echo "</div>";
             }
         } else {
             echo "<p>Aucune réponse pour ce sujet.</p>";
@@ -105,6 +117,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['content'])) {
 <script>
     function goBack() {
         window.location.href = '../forum/forum.php'; 
+    }
+
+    // Fonction JavaScript pour supprimer le post via un rafraîchissement direct
+    function deletePost(postId) {
+        if (confirm("Voulez-vous vraiment supprimer ce post ?")) {
+            window.location.href = "topic.php?id=<?php echo $topic_id; ?>&delete_post=" + postId;
+        }
     }
 </script>
 </html>

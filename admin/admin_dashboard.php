@@ -5,6 +5,21 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+// Vérifier si l'utilisateur est connecté
+if (isset($_SESSION['email'])) {
+    // Vérifier le rôle de l'utilisateur
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+        // Si l'utilisateur est administrateur, diriger vers le tableau de bord admin
+        $profil_link = "../admin/admin_dashboard.php"; 
+    } else {
+        // Si l'utilisateur est normal, diriger vers compteProfil.php
+        $profil_link = "../compteProfil/compteProfil.php";
+    }
+} else {
+    // L'utilisateur n'est pas connecté, le lien doit diriger vers la page de connexion/inscription
+    $profil_link = "../profil/profil.php";
+}
+
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
@@ -25,6 +40,15 @@ $user_count = $user_count_result->fetch_assoc()['total_users'];
 $topics_count_query = "SELECT COUNT(*) AS total_topics FROM topics";
 $topics_count_result = $conn->query($topics_count_query);
 $topics_count = $topics_count_result->fetch_assoc()['total_topics'];
+
+// Gérer la déconnexion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    // Détruire la session et rediriger vers la page de connexion
+    session_unset();
+    session_destroy();
+    header("Location: ../connexion/connexion.php");
+    exit();
+}
 
 ?>
 
@@ -66,6 +90,33 @@ $topics_count = $topics_count_result->fetch_assoc()['total_topics'];
             margin: 5px 0;
         }
 
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .logout-button form {
+            display: inline;
+        }
+
+        .logout-button button {
+            background-color: #d9524a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-button button:hover {
+            background-color: #b8453c;
+        }
+
+
         .options {
             text-align: center;
             margin-top: 20px;
@@ -87,6 +138,15 @@ $topics_count = $topics_count_result->fetch_assoc()['total_topics'];
     <link rel="stylesheet" href="../accueil/stylesIndex.css">
 </head>
 <body>
+<header class="header">
+        <span class="menu-icon" onclick="toggleMenu()">☰</span>
+</header>
+
+    <div class="logout-button">
+        <form action="" method="post">
+            <button type="submit" name="logout">Déconnexion</button>
+        </form>
+    </div>
 <div class="container">
     <h1>Tableau de Bord Administrateur</h1>
     
@@ -110,11 +170,20 @@ $topics_count = $topics_count_result->fetch_assoc()['total_topics'];
         <h2>Statistiques Générales</h2>
         <p>Nombre total de connexions, sujets créés, etc.</p>
         <div class="options">
-            <a href="view_stats.php">Voir les statistiques</a>
+            <a href="stats.php">Voir les statistiques</a>
         </div>
     </div>
+
+    <div class="menu" id="menu">
+        <a href="index.php">Accueil</a>
+        <a href="../presentation/presentation.php">Présentation</a>
+        <a href="../forum/forum.php">Forum</a>
+        <a href="<?php echo $profil_link; ?>">Mon Profil</a>
+    </div>
+    
 </div>
 </body>
+<script src="../js/scriptIndex.js"></script>
 </html>
 
 <?php

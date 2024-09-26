@@ -51,13 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier Sujet</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -65,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            width: 900px;
         }
 
         h1 {
@@ -83,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         textarea {
+            height: 200px;
             resize: vertical;
         }
 
@@ -102,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../forum/forum.css">
 </head>
 <body>
+<div class="back-arrow" onclick="goBack()">←</div>
 <div class="container">
     <h1>Modifier Sujet</h1>
     <form method="post">
@@ -123,6 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 </body>
+<script>
+    function goBack() {
+        window.location.href = '../admin/admin_dashboard.php'; 
+    }
+</script>
 </html>
 
 <?php

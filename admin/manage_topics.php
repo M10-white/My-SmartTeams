@@ -87,6 +87,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="../forum/forum.css">
 </head>
 <body>
+<div class="back-arrow" onclick="goBack()">←</div>
 <div class="container">
     <h1>Gestion des Sujets</h1>
     <table>
@@ -118,6 +119,11 @@ $result = $conn->query($sql);
     </table>
 </div>
 </body>
+<script>
+    function goBack() {
+        window.location.href = '../admin/admin_dashboard.php'; 
+    }
+</script>
 </html>
 
 <?php

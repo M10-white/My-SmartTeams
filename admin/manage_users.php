@@ -70,11 +70,6 @@ $result = $conn->query($sql);
             background-color: #b8453c;
         }
 
-        .add-user {
-            text-align: center;
-            margin: 20px 0;
-        }
-
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -88,6 +83,8 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="../forum/forum.css">
 </head>
 <body>
+<div class="back-arrow" onclick="goBack()">←</div>
+
 <div class="container">
     <h1>Gestion des Utilisateurs</h1>
     <table>
@@ -121,11 +118,14 @@ $result = $conn->query($sql);
         }
         ?>
     </table>
-    <div class="add-user">
-        <a href="add_user.php" class="btn">Ajouter un Utilisateur</a>
-    </div>
+
 </div>
 </body>
+<script>
+    function goBack() {
+        window.location.href = '../admin/admin_dashboard.php'; 
+    }
+</script>
 </html>
 
 <?php

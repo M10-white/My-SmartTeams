@@ -90,9 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-color: #b8453c;
         }
     </style>
-    <link rel="stylesheet" href="../accueil/stylesIndex.css">
+    <link rel="stylesheet" href="../forum/forum.css">    
 </head>
 <body>
+<div class="back-arrow" onclick="goBack()">←</div>
+
 <div class="container">
     <h1>Modifier Utilisateur</h1>
     <form method="post">
@@ -121,6 +123,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 </body>
+<script>
+    function goBack() {
+        window.location.href = '../admin/admin_dashboard.php'; 
+    }
+</script>
 </html>
 
 <?php

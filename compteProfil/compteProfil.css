@@ -1,8 +1,16 @@
-.profile-container {
+.profile-containere {
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 900px;
+    width: 900px;
+    margin: 50px auto;
+    margin-bottom: 20px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
+h1, h2 {
     color: #ffffff;
 }
 
@@ -11,16 +19,62 @@ p {
     color: #ffffff;
 }
 
-.logout-button {
-    background-color: #d32f2f; /* Couleur du bouton de déconnexion */
-    color: white;
+form {
+    margin: 20px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
 }
 
-.logout-button:hover {
+.update-button {
+    background-color: #0288d1; /* Couleur du bouton de mise à jour */
+    color: white;
+}
+
+.update-button:hover {
+    background-color: #0277bd; /* Couleur au survol */
+}
+
+.delete-button {
+    background-color: #d32f2f; /* Couleur du bouton de suppression */
+    color: white;
+}
+
+.delete-button:hover {
     background-color: #c62828; /* Couleur au survol */
+}
+
+.logout-button {
+    background-color: #7b1fa2; /* Couleur du bouton de déconnexion */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #6a1b9a; /* Couleur au survol */
 }

@@ -27,10 +27,23 @@ if (isset($_SESSION['email'])) {
         $profil_link = "../compteProfil/compteProfil.php";
     }
 } else {
-    // L'utilisateur n'est pas connecté, le lien doit diriger vers la page de connexion/inscription
     $profil_link = "../profil/profil.php";
 }
 
+// Gérer la suppression d'un sujet
+if (isset($_GET['delete_topic'])) {
+    $topic_id = $_GET['delete_topic'];
+    $user_id = $_SESSION['id'];
+
+    // Vérifier que l'utilisateur est le propriétaire du sujet
+    $delete_sql = "DELETE FROM topics WHERE id = '$topic_id' AND user_id = '$user_id'";
+    if ($conn->query($delete_sql) === TRUE) {
+        header("Location: forum.php"); // Rafraîchir la page après suppression
+        exit();
+    } else {
+        echo "Erreur lors de la suppression : " . $conn->error;
+    }
+}
 
 // Vérifier si un nouveau sujet est créé
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'])) {
@@ -42,18 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'])) {
 
     $sql = "INSERT INTO topics (user_id, title, description, theme) VALUES ('$user_id', '$title', '$description', '$theme')";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>
-        var popup = document.createElement('div');
-        popup.className = 'popup success';
-        popup.textContent = 'Sujet créé avec succès!';
-        document.body.appendChild(popup);
-        setTimeout(function() {
-            popup.style.animation = 'popupHide 0.5s forwards'; 
-            setTimeout(function() {
-                popup.remove(); 
-            }, 500);
-        }, 2000);
-    </script>";
+        header("Location: forum.php"); // Rediriger pour rafraîchir la page
+        exit();
     } else {
         echo "Erreur : " . $sql . "<br>" . $conn->error;
     }
@@ -76,7 +79,6 @@ if (!empty($theme_filter)) {
 $sql .= " ORDER BY topics.created_at DESC";
 
 $result = $conn->query($sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -146,6 +148,11 @@ $result = $conn->query($sql);
                 echo "<p>Thème : " . htmlspecialchars($row['theme']) . "</p>";
                 echo "<p>Campus de " . htmlspecialchars($row['ville']) . "</p>";
                 echo "<p>Posté par : " . htmlspecialchars($row['prenom']) . " (". htmlspecialchars($row['status']) .")</p>";
+                
+                // Afficher le bouton de suppression si l'utilisateur est propriétaire du sujet
+                if ($_SESSION['id'] == $row['user_id']) {
+                    echo "<a href='javascript:void(0);' class='delete-button' onclick='deleteTopic(" . $row['id'] . ");'>Supprimer</a>";
+                }
                 echo "</div>";
             }
         } else {
@@ -163,5 +170,17 @@ $result = $conn->query($sql);
     </div>
 
 </body>
+<script>
+    function toggleMenu() {
+        document.getElementById('menu').classList.toggle('active');
+    }
+
+    // Fonction pour confirmer et supprimer un sujet
+    function deleteTopic(topicId) {
+        if (confirm("Voulez-vous vraiment supprimer ce sujet ?")) {
+            window.location.href = "forum.php?delete_topic=" + topicId;
+        }
+    }
+</script>
 <script src="../js/scriptIndex.js"></script>
 </html>
