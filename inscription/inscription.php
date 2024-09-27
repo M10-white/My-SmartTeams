@@ -26,6 +26,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm-password'];
 
+    // Définition de l'expression régulière pour l'email
+    $email_pattern = "/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/";
+
+    // Vérification si l'adresse e-mail est valide
+    if (!preg_match($email_pattern, $email)) {
+        echo "<script>
+            var popup = document.createElement('div');
+            popup.className = 'popup error';
+            popup.textContent = 'Adresse e-mail invalide. Veuillez entrer une adresse e-mail valide.';
+            document.body.appendChild(popup);
+            setTimeout(function() {
+                popup.style.animation = 'popupHide 0.5s forwards'; 
+                setTimeout(function() {
+                    popup.remove(); 
+                }, 500);
+            }, 3000);
+        </script>";
+        exit();
+    }
+
     // Vérification si les mots de passe correspondent
     if ($password != $confirm_password) {
         echo "<script>
